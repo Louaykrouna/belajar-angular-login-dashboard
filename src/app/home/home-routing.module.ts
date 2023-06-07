@@ -7,6 +7,7 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
+      { path: '', loadChildren: () => import('../welcome/welcome.module').then(m => m.WelcomeModule) },
       { path: '**', loadChildren: () => import('../not-found/not-found.module').then(m => m.NotFoundModule) }
     ]
   }
