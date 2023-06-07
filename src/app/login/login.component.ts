@@ -56,12 +56,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.myForm.valid) {
-      console.log(this.myForm.value);
       this.varSub = this.userData$.subscribe({
-        next: (response) => {          
+        next: (response) => {         
+          let tempUE = false; 
           for (let i = 0; i < response.length; i++) {
             if (response[i].email === this.myForm.value.floatingEmail && response[i].password === this.myForm.value.floatingPassword) {
-              this.isUserExist = true;
+              tempUE = true;
               localStorage.setItem("isLogin", "true");
               let userData: UserObjType = {...response[i]};
               delete userData.password;
@@ -69,7 +69,10 @@ export class LoginComponent implements OnInit, OnDestroy {
               break;
             }
           }
-          if (this.isUserExist) this.router.navigate(['/']);
+          if (tempUE) {
+            this.isUserExist = true;
+            this.router.navigate(['/']);
+          }
           else this.isUserExist = false;
         },
         error: (err) => {
