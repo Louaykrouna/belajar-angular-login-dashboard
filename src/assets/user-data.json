@@ -3,18 +3,18 @@
         "id": 1,
         "name": "Frumentius",
         "email": "frumentius_sonic@yahoo.com",
-        "password": "asdf123456"
+        "password": "Asdf123456"
     },
     {
         "id": 2,
         "name": "Ghina Salsabila",
         "email": "gs@gmail.com",
-        "password": "gs1234"
+        "password": "Asdf123456"
     },
     {
         "id": 3,
         "name": "Meylisa",
         "email": "memey@msn.com",
-        "password": "ml1234"
+        "password": "Asdf123456"
     }
 ]

@@ -1,1 +1,44 @@
-<p>login works!</p>
+<div class="container-fluid">
+    <div class="row bg-body-tertiary">
+        <div class="col d-flex">
+            <main class="form-signin w-100 m-auto">
+                <p *ngIf="(floatingEmail?.invalid && (floatingEmail?.dirty || floatingEmail?.touched)) || (floatingPassword?.invalid && (floatingPassword?.dirty || floatingPassword?.touched))">
+                    <ngb-alert [dismissible]="false" type="danger">
+                        <strong>Error!</strong>
+                        <ul>
+                            <li *ngIf="floatingEmail?.errors?.['required']">Please enter email address.</li>
+                            <li *ngIf="floatingEmail?.errors?.['email']">Invalid email format.</li>
+                            <li *ngIf="floatingPassword?.errors?.['required']">Please enter password.</li>
+                            <li *ngIf="floatingPassword?.errors?.['passwordStrength']">Invalid password format.</li>
+                        </ul>
+                    </ngb-alert>
+                </p>
+                <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                    <img class="mb-4" src="/assets/shield-large.svg" alt="" width="72" height="57" />
+                    <img class="mb-4" src="/assets/ng-bootstrap-logo.svg" alt="" width="72" height="57" />
+                    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com"
+                            name="floatingEmail" formControlName="floatingEmail" required />
+                        <label for="floatingEmail">Email address</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" name="floatingPassword"
+                            formControlName="floatingPassword" placeholder="Password" required />
+                        <label for="floatingPassword">Password</label>
+                    </div>
+
+                    <div class="form-check text-start my-3">
+                        <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" />
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Remember me
+                        </label>
+                    </div>
+                    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                    <p class="mt-5 mb-3 text-body-secondary text-center">&copy; {{ copyYear }}</p>
+                    </form>
+            </main>
+        </div>
+    </div>
+</div>
