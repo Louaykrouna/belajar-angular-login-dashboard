@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-floating">
                         <input type="password" class="form-control" id="floatingPassword" name="floatingPassword"
-                            formControlName="floatingPassword" placeholder="Password" required />
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" formControlName="floatingPassword" placeholder="Password" required />
                         <label for="floatingPassword">Password</label>
                     </div>
 
