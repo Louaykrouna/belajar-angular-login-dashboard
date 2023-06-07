@@ -1,0 +1,23 @@
+<nav class="navbar bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/assets/shield-large.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top" />
+            <img src="/assets/ng-bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top" />
+            Belajar Angular
+        </a>
+        <button class="navbar-toggler" type="button" (click)="open(content)">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <ng-template #content let-offcanvas>
+            <div class="offcanvas-header">
+                <h4 class="offcanvas-title" id="offcanvas-basic-title">Menu</h4>
+                <button type="button" class="btn-close" aria-label="Close"
+                    (click)="offcanvas.dismiss('Cross click')"></button>
+            </div>
+            <div class="offcanvas-body">
+            </div>
+        </ng-template>
+    </div>
+</nav>
+<div class="py-5"></div>
