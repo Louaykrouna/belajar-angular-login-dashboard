@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-nav-bar',
+  imports: [RouterModule],
   standalone: true,
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
