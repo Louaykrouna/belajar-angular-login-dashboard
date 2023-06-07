@@ -1,6 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router"
+
+import { Subscription } from 'rxjs';
+
 import { inputPasswordValidator } from '../validator/input-validator';
+import { UserObjType } from '../type/type-interfaces';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +16,16 @@ import { inputPasswordValidator } from '../validator/input-validator';
 export class LoginComponent implements OnInit, OnDestroy {
   copyYear: number;
   myForm!: FormGroup;
+  varSub!: null | Subscription;
+  userData$;
+  isUserExist;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient) {
     let tgl = new Date();
     this.copyYear = tgl.getFullYear();
+
+    this.userData$ = this.http.get<UserObjType[]>('/assets/user-data.json');
+    this.isUserExist = true;
   }
 
   ngOnInit(): void {
@@ -45,17 +57,36 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.myForm.valid) {
       console.log(this.myForm.value);
-      // Perform further actions with the form data
+      this.varSub = this.userData$.subscribe({
+        next: (response) => {
+          let isUserExist = false;
+          
+          for (let i = 0; i < response.length; i++) {
+            if (response[i].email === this.myForm.value.floatingEmail && response[i].password === this.myForm.value.floatingPassword) {
+              isUserExist = true;
+              localStorage.setItem("isLogin", "true");
+              let userData: UserObjType = {...response[i]};
+              delete userData.password;
+              localStorage.setItem("userData", JSON.stringify(userData));
+              break;
+            }
+          }
+          if (isUserExist) this.router.navigate(['/']);
+          else this.isUserExist = isUserExist;
+        },
+        error: (err) => {
+          console.log(err.message);
+        },
+        complete: () => console.log('Complete!')
+      });
     }
   }
 
-  ngOnDestroy(): void {
-    
+  closeAlertUserExist(): void{
+    this.isUserExist = true;
   }
-}
-interface UserObj {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
+
+  ngOnDestroy(): void {
+    if (this.varSub) this.varSub.unsubscribe();
+  }
 }
