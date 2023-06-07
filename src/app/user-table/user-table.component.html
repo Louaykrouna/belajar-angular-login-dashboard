@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row pt-5">
+        <div class="col">
+            <h4>User Data</h4>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-xs-4 col-md-6 col-sm-12">
+            <form>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1"><fa-icon [icon]="faMagnifyingGlass" /></span>
+                    <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter"
+                        placeholder="search..." aria-label="Search" aria-describedby="basic-addon1">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of userFilter$ | async; index as i">
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td><ngb-highlight [result]="user.name" [term]="filter.value"></ngb-highlight></td>
+                                <td><ngb-highlight [result]="user.email" [term]="filter.value"></ngb-highlight></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
