@@ -7,12 +7,10 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { UserTableRoutingModule } from './user-table-routing.module';
-import { UserTableComponent } from './user-table.component';
 
 
 @NgModule({
   declarations: [
-    UserTableComponent
   ],
   imports: [
     CommonModule,

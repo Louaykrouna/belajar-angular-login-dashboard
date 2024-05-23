@@ -1,0 +1,27 @@
+<div class="chat-container">
+  <app-feedback *ngIf="showFeedback"></app-feedback>
+  <div class="chat-header">
+    <h2>Chat with {{this.chatWith}}</h2>
+  </div>
+  <div class="chat-messages">
+    <div *ngFor="let message of messages" class="chat-message">
+      <div class="single-msg">
+        <p [ngClass]="message?.sender_id === this.userData?._id ? 'my-msg-chat' : 'other-msg-chat'">
+        {{ message.message }}
+      </p>
+      </div>
+    </div>
+  </div>
+  <div class="chat-input-container">
+    <input
+      type="text"
+      [(ngModel)]="newMessage"
+      placeholder="Type your message here..."
+      (keyup.enter)="sendMessage()"
+      class="chat-input"
+    />
+    <button (click)="sendMessage()" class="chat-send-button">Send</button>
+    <button *ngIf="userRole == 'user'" (click)="handleShowFeedback()" class="chat-close-button">Close Chat</button>
+  </div>
+</div>
+

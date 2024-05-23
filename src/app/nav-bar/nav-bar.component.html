@@ -1,11 +1,8 @@
-<nav class="navbar bg-body-tertiary fixed-top">
+<nav  class="navbar bg-body-tertiary fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
-            <img src="/assets/shield-large.svg" alt="Logo" width="30" height="24"
+            <img src="/assets/LOGO.png" alt="Logo" width="80" height="60"
                 class="d-inline-block align-text-top" />
-            <img src="/assets/ng-bootstrap-logo.svg" alt="Logo" width="30" height="24"
-                class="d-inline-block align-text-top" />
-            Belajar Angular
         </a>
         <button class="navbar-toggler" type="button" (click)="open(content)">
             <span class="navbar-toggler-icon"></span>
@@ -20,8 +17,8 @@
             <div class="offcanvas-body px-0">
                 <div class="list-group list-group-flush">
                     <a routerLink="/" (click)="offcanvas.dismiss('Home Menu Click')" class="list-group-item list-group-item-action">Home</a>
-                    <a routerLink="/user" (click)="offcanvas.dismiss('User Menu Click')" class="list-group-item list-group-item-action">User</a>
-                    <a routerLink="/logout" (click)="offcanvas.dismiss('Logout Click')" class="list-group-item list-group-item-action">Logout</a>
+                    <a *ngIf="userRole == 'administrator'" routerLink="/user" (click)="offcanvas.dismiss('User Menu Click')" class="list-group-item list-group-item-action">User</a>
+                    <a routerLink="/logout" (click)="offcanvas.dismiss('Logout Click');handleLogout()" class="list-group-item list-group-item-action">Logout</a>
                 </div>
             </div>
         </ng-template>

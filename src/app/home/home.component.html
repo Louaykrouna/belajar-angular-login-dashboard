@@ -1,2 +1,4 @@
 <app-nav-bar />
+<app-welcome></app-welcome> 
 <router-outlet></router-outlet>
+<button *ngIf="userRole == 'user'||userRole == 'support' "class="btn btn-primary navigate-tickets-btn" (click)="goToTickets()" >View Tickets</button>

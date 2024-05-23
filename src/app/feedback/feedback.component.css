@@ -1,0 +1,21 @@
+.feedback-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* background-color: white; */
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.feedback{
+    padding: 40px;
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+}

@@ -1,46 +1,81 @@
 <div class="container">
     <div class="row pt-5">
-        <div class="col">
-            <h4>User Data</h4>
-        </div>
+      <div class="col">
+        <h4>User Data</h4>
+      </div>
     </div>
-</div>
-<div class="container mt-3">
+  </div>
+  
+  <div class="container mt-3">
     <div class="row">
-        <div class="col-xs-4 col-md-6 col-sm-12">
-            <form>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1"><fa-icon [icon]="faMagnifyingGlass" /></span>
-                    <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter"
-                        placeholder="search..." aria-label="Search" aria-describedby="basic-addon1">
-                </div>
-            </form>
-        </div>
+      <div class="col-md-8">
+        <form>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="username-label">Username:</span>
+            <input type="text" class="form-control" placeholder="Enter username" aria-label="Username"
+              aria-describedby="username-label" [(ngModel)]="newUser.username" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="email-label">Email:</span>
+            <input type="email" class="form-control" placeholder="Enter email" aria-label="Email"
+              aria-describedby="email-label" [(ngModel)]="newUser.email" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="password-label">Password:</span>
+            <input type="text" class="form-control" placeholder="Generated password" aria-label="Password"
+              aria-describedby="password-label" [value]="newUser.password" readonly>
+            <button class="btn btn-outline-secondary" type="button" (click)="generatePassword()">Generate</button>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="role-label">Role:</span>
+            <select class="form-control" aria-label="Role" aria-describedby="role-label" [(ngModel)]="newUser.role"
+              [ngModelOptions]="{standalone: true}">
+              <option value="user">User</option>
+              <option value="support">Support</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" type="button" (click)="addUser(newUser)">Add New User</button>
+        </form>
+      </div>
     </div>
-</div>
-<div class="container mt-3">
+  </div>
+  
+  <div class="container mt-3">
     <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let user of userFilter$ | async; index as i">
-                                <th scope="row">{{ i + 1 }}</th>
-                                <td><ngb-highlight [result]="user.name" [term]="filter.value"></ngb-highlight></td>
-                                <td><ngb-highlight [result]="user.email" [term]="filter.value"></ngb-highlight></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="search-label">Search:</span>
+              <input type="text" class="form-control" placeholder="Search users" aria-label="Search"
+                aria-describedby="search-label" [formControl]="filter">
             </div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of userFilter$ | async; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                      <button class="btn btn-danger btn-sm" (click)="deleteUser(user._id)">Delete</button>
+                    </td>
+                  </tr>
+                  
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>

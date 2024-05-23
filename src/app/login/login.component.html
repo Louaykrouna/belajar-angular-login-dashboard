@@ -2,14 +2,15 @@
     <div class="row bg-body-tertiary">
         <div class="col d-flex">
             <main class="form-signin w-100 m-auto">
-                <p *ngIf="(floatingEmail?.invalid && (floatingEmail?.dirty || floatingEmail?.touched)) || (floatingPassword?.invalid && (floatingPassword?.dirty || floatingPassword?.touched))">
+                <p *ngIf="(email?.invalid && (email?.dirty || email?.touched)) || (password?.invalid && (password?.dirty || password?.touched))">
                     <ngb-alert [dismissible]="false" type="danger">
                         <strong>Error!</strong>
                         <ul>
-                            <li *ngIf="floatingEmail?.errors?.['required']">Please enter email address.</li>
-                            <li *ngIf="floatingEmail?.errors?.['email']">Invalid email format.</li>
-                            <li *ngIf="floatingPassword?.errors?.['required']">Please enter password.</li>
-                            <li *ngIf="floatingPassword?.errors?.['passwordStrength']">Invalid password format.</li>
+                            <li *ngIf="email?.errors?.['required']">Please enter email address.</li>
+                            <li *ngIf="email?.errors?.['email']">Invalid email format.</li>
+                            <li *ngIf="password?.errors?.['required']">Please enter password.</li>
+                            <li *ngIf="password?.errors?.['passwordStrength']">Invalid password format.</li>
+
                         </ul>
                     </ngb-alert>
                 </p>
@@ -21,18 +22,17 @@
                     </ngb-alert>
                 </p>
                 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-                    <img class="mb-4" src="/assets/shield-large.svg" alt="" width="72" height="57" />
-                    <img class="mb-4" src="/assets/ng-bootstrap-logo.svg" alt="" width="72" height="57" />
-                    <h1 class="h3 mb-3 fw-normal">Please Login</h1>
+                    <img class="mb-4" src="/assets/LOGO.png" alt="" width="260" height="200" />
+                    <h2 class="h3 mb-3 fw-normal"> Login</h2>
 
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com"
-                            name="floatingEmail" formControlName="floatingEmail" required />
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com"
+                            name="email" formControlName="email" required />
                         <label for="floatingEmail">Email address</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" name="floatingPassword"
-                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" formControlName="floatingPassword" placeholder="Password" required />
+                        <input type="password" class="form-control" id="password" name="password"
+                            formControlName="password" placeholder="Password" required />
                         <label for="floatingPassword">Password</label>
                     </div>
 
@@ -42,7 +42,7 @@
                     </div>
                     <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
                     <p class="mt-5 mb-3 text-body-secondary text-center">&copy; {{ copyYear }}</p>
-                    </form>
+                </form>
             </main>
         </div>
     </div>

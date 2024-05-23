@@ -1,6 +1,8 @@
 export interface UserObjType {
-    id: number;
-    name: string;
+    _id?: string;
+    username: string;
     email: string;
-    password?: string;
-}
+    password: string;
+    role: 'user' | 'support' | 'admin'; // Update the role field type
+  }
+  

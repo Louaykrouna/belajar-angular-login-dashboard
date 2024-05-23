@@ -1,0 +1,37 @@
+<div *ngIf="userRole == 'user'||userRole == 'support'" class="container"  >
+  <ng-container *ngIf="userRole == 'support' || userRole == 'user'">
+    <ng-container *ngIf="userRole == 'user'">
+      <h2>Tickets</h2>
+      <form (submit)="onSubmit()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="newTicket.title" required>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" name="description" [(ngModel)]="newTicket.description" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Ticket</button>
+      </form>
+    </ng-container>
+
+    <h3>List of Tickets</h3>
+    <div *ngFor="let ticket of tickets">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Title : {{ ticket.title }}</h5>
+          <h6 class="card-text">Description : {{ ticket.description }}</h6>
+          <h6 class="card-createdBy">Created By: {{ ticket.createdBy.username || 'Unknown' }}</h6>
+          <h6 class="card-status">Status: {{ ticket.status }}</h6>
+          <h6 class="card-status">Support: {{ ticket.support_id }}</h6>
+          <h6 class="card-createdAt">Created At : {{ ticket.createdAt | date: 'medium' }}</h6>
+          <button *ngIf="ticket.chatId" (click)="navigateToChat(ticket.chatId)" class="btn card-chatLink">Chat Here!</button>
+          <button *ngIf="userRole == 'user'" class="btn btn-primary" (click)="updateTicketForUser(ticket)">Update for User</button>
+          <button *ngIf="userRole == 'support'" class="btn btn-primary" (click)="updateTicketForSupport(ticket)">Update for Support</button>
+          <button *ngIf="userRole == 'support' && ticket.status == 'Open'" class="btn btn-success" (click)="acceptTicket(ticket)" type="button">Accept</button>
+          <button class="btn btn-danger" (click)="deleteTicket(ticket._id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
